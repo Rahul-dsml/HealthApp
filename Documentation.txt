@@ -1,0 +1,45 @@
+Project Documentation: Personal Health Assistant 
+1. Overview 
+	The Personal Health Assistant is a mobile application designed to help users track their food intake, receive nutritional information, and get meal recommendations based on their dietary goals. 
+	The assistant includes a chatbot that processes both text and images to analyze the user's food intake and provides insights about calories and nutrients. 
+	The system will eventually include voice interaction. 
+2. User Registration and Onboarding Workflow: 
+	Step 1: User opens the app and registers using their email and name. 
+	Step 2: After registration, the user is taken to a profile setup page where the following information is collected: 
+			-	Age 
+			-	Sex (Male/Female/Other) 
+			-	Dietary Preference (Vegetarian, Non-Vegetarian, Eggetarian) 
+			-	Height (in cm/inches) Weight (in kg/lbs) 
+			-	Any medical conditions (e.g., diabetes, hypertension, etc.) 
+			-	User’s goal (e.g., weight loss, muscle gain, maintaining health) 
+3. Chatbot Interface 
+	Once the user profile is set up, they are introduced to a chatbot interface. 
+	Greeting: The chatbot will greet the user by name and ask: 
+				"Hi [User's Name], how are you feeling today?" 
+	User Interaction Features: 
+		Text Input: The user can input text, including a description of their meals (e.g., "I ate 2 chapatis and dal"). 
+		Image Input: The user can upload images of their meals, and the chatbot will process them to provide insights about the food’s calorie content and nutritional breakdown. 
+		Voice Interaction (Future Feature): In the future, the chatbot will have the capability to process voice inputs, allowing for more seamless interaction. 
+4. Food Meal Processing 
+	Text Analysis: The chatbot will analyze the meal description provided in text and give a detailed breakdown of: 
+					-	Calories Macronutrients (Carbohydrates, Proteins, Fats) 
+					-	Micronutrients (Vitamins, Minerals, etc.) 
+	Image Analysis: The chatbot will use image recognition to identify food items and provide the same level of nutritional information. 
+5. Recommendations 
+	Based on Goals If the user has specified a goal during profile setup (e.g., weight loss or muscle gain), 
+	the chatbot will also provide meal recommendations for the next meal. 
+	Example Scenario: If a user is on a weight loss journey, and they had a calorie-rich lunch, 
+					  the chatbot may recommend a lighter dinner such as a salad with a protein source like paneer or tofu. 
+6. Future Enhancements 
+	Voice Interaction: The chatbot will incorporate voice input functionality, enabling users to interact with the assistant via voice commands. 
+	Personalized Health Tips: The system will suggest health tips based on user medical conditions (e.g., heart-healthy meals for users with hypertension). 
+7. Data Privacy and Security 
+	All user data, including health and nutritional information, will be stored securely with encryption in compliance with data protection regulations. 
+8. Technology Stack 
+	Frontend: Mobile app developed using React Native or Flutter for cross-platform support (iOS & Android) 
+	Backend: Node.js with Express for handling user requests and responses Python and LLM for meal image analysis and text processing 
+	Database: CosmosDB for storing user profiles and meal history 
+	APIs: LLM or Nutritionix API (or similar) to fetch nutritional information from a database of food items. 
+9. Key Features 
+	Summary User Registration and Profile Setup Chatbot capable of processing text and images Personalized nutritional insights 
+	Meal recommendations based on user goals Future addition of voice interaction
