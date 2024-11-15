@@ -177,14 +177,6 @@ jupyterlab_widgets==3.0.12
 keyring==24.3.1
 kiwisolver==1.4.5
 knack==0.11.0
-langchain==0.2.3
-langchain-community==0.2.4
-langchain-core==0.2.34
-langchain-experimental==0.0.64
-langchain-openai==0.1.8
-langchain-text-splitters==0.2.2
-langchainhub==0.1.18
-langsmith==0.1.101
 llvmlite==0.43.0
 markdown-it-py==3.0.0
 MarkupSafe==2.1.5
