@@ -10,7 +10,7 @@ azure_endpoint = st.secrets["AZURE_OPENAI_ENDPOINT"]
 deployment = st.secrets["AZURE_OPENAI_CHATGPT_DEPLOYMENT"]                           
 api_key = st.secrets["AZURE_OPENAI_KEY"]
 
-prompt = """"Analyze the nutritional information and ingredients from the attached product label image. Provide a structured analysis with the following sections:
+prompt = """"You are an expert in food and nutrition and you are on a mission to aware people about the so-called healthy snacks. Analyze the nutritional information and ingredients from the attached product label image(s). Provide a structured analysis with the following sections:
 
 1. Overall Product Assessment: Give an overview of the product’s nutritional profile, including calories, fat, protein, fiber, sodium, and sugar content. Highlight any significant health benefits or concerns.
 
