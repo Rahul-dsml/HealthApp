@@ -1,15 +1,14 @@
 import streamlit as st
 import os
-from dotenv import load_dotenv
 from libraries import ImageModel, ImageModelUploader
 from PIL import Image
 
-# Load environment variables from .env file
-load_dotenv(override=True)
+# Load environment variables from .toml file
 
-azure_endpoint = os.getenv("AZURE_OPENAI_ENDPOINT")
-deployment = os.getenv("AZURE_OPENAI_CHATGPT_DEPLOYMENT")                           
-api_key = os.getenv("AZURE_OPENAI_KEY")
+
+azure_endpoint = st.secrets["AZURE_OPENAI_ENDPOINT"]
+deployment = st.secrets["AZURE_OPENAI_CHATGPT_DEPLOYMENT"]                           
+api_key = st.secrets["AZURE_OPENAI_KEY"]
 
 prompt = """"Analyze the nutritional information and ingredients from the attached product label image. Provide a structured analysis with the following sections:
 
