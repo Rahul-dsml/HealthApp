@@ -41,7 +41,7 @@ if st.button("Analyze"):
         try:
             # Display the uploaded image
             image = Image.open(uploaded_image)
-            st.image(image, caption="Uploaded Image", use_container_width=True)
+            st.image(image, caption="Uploaded Image", use_column_width=True)
             
             # Initialize ImageModel and make a prediction
             inference = ImageModelUploader(azure_endpoint=azure_endpoint, api_key=api_key, deployment=deployment, prompt=prompt)
