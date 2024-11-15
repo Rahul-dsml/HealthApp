@@ -1,6 +1,6 @@
 import streamlit as st
 import os
-from libraries import ImageModel, ImageModelUploader
+from libraries import ImageModel, ImageModelUploader, ImageModelMultipleUploader
 from PIL import Image
 
 # Load environment variables from .toml file
@@ -44,26 +44,39 @@ st.title("Your Personal Nutritional Doctor!")
 st.write("Upload an image of the product label to analyze.")
 
 # Image upload from user
-uploaded_image = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"])
+uploaded_images = st.file_uploader("Choose an image...", type=["jpg", "jpeg", "png"], accept_multiple_files = True)
+
+# Limit the number of images to 3
+if uploaded_images and len(uploaded_images) > 3:
+    st.warning("Please upload a maximum of 3 images.")
+    uploaded_images = uploaded_images[:3]
 
 if st.button("Analyze"):
-    if uploaded_image is not None:
+    if uploaded_images:
         try:
-            # Display the uploaded image
-            image = Image.open(uploaded_image)
-            st.image(image, caption="Uploaded Image", use_column_width=True)
-            
+            for idx, uploaded_image in enumerate(uploaded_images, start=1):
+                st.subheader(f"Processing Image {idx}:")
+                
+                # Display the uploaded image
+                image = Image.open(uploaded_image)
+                st.image(image, caption=f"Uploaded Image {idx}", use_column_width=True)
+                
             # Initialize ImageModel and make a prediction
-            inference = ImageModelUploader(azure_endpoint=azure_endpoint, api_key=api_key, deployment=deployment, prompt=prompt)
+            inference = ImageModelMultipleUploader(
+                azure_endpoint=azure_endpoint, 
+                api_key=api_key, 
+                deployment=deployment, 
+                prompt=prompt
+            )
 
             # Pass the uploaded image file-like object to predict
-            inf = inference.predict(image_file=uploaded_image)
+            inf = inference.predict(image_files=uploaded_images)
             
-            # Display the results
-            st.subheader("Results:")
+            # Display the results for each image
+            st.subheader(f"Results for the product:")
             st.write(inf)
         except Exception as e:
-            st.error(f"Error analyzing image: {e}")
+            st.error(f"Error analyzing images: {e}")
     else:
-        st.warning("Please upload a valid image file.")
+        st.warning("Please upload valid image files.")
 
