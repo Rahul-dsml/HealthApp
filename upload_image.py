@@ -27,7 +27,8 @@ prompt = """"Analyze the nutritional information and ingredients from the attach
     - Diabetes Management: Provide insights on the product’s carbohydrate and sugar content and its impact on blood sugar levels.
 
 3. Final Recommendation: Based on the nutritional analysis, provide a recommendation on the frequency of consumption (e.g., daily, occasional, or rarely). Include any portion control advice if relevant.
-Please output each section in clear, structured text."""
+4. Final Score: Based on your analysis and pretrained knowledge of Indian people food habits and patterns, give a final score on the scale of 10. Add emojis for personalized touch.
+Please output each section in clear, structured text and add emojis wherever it is required for friendly and personalized touch"""
 
 st.title("Your Personal Nutritional Doctor!")
 st.write("Upload an image of the product label to analyze.")
