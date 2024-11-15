@@ -128,3 +128,69 @@ class ImageModelUploader:
         # Call the model with the provided image file and context
         ans = self.call_model(image_file)
         return ans
+
+class ImageModelMultipleUploader:
+    def __init__(self, azure_endpoint, api_key, deployment, prompt):
+        self.azure_endpoint = azure_endpoint
+        self.api_key = api_key
+        self.deployment = deployment
+        self.prompt = prompt
+        self.client = AzureOpenAI(
+            azure_endpoint=self.azure_endpoint,
+            api_key=self.api_key,
+            api_version="2024-02-01"
+        )
+
+    def encode_image_to_base64(self, image_file):
+        """Convert image file to a base64 string."""
+        image_file.seek(0)
+        encoded_string = base64.b64encode(image_file.read()).decode("utf-8")
+        return encoded_string
+
+    def call_model(self, image_data_list):
+        """Send multiple images and prompt to the multimodal GPT model."""
+        # Prepare messages with prompt and images
+        messages = [{"role": "user", "content": [{"type": "text", "text": self.prompt}]}]
+
+        # Append each image to the message
+        for image_data in image_data_list:
+            messages[0]["content"].append(
+                {
+                    "type": "image_url",
+                    "image_url": {
+                        "url": image_data,
+                        "detail": "high"
+                    }
+                }
+            )
+
+        try:
+            # Call the GPT model with combined images
+            completion = self.client.chat.completions.create(
+                model=self.deployment,
+                messages=messages
+            )
+
+            # Return the model's response content
+            return completion.choices[0].message.content
+        except Exception as e:
+            print(f"Error in call_model: {e}")
+            raise e
+
+    def predict(self, image_files):
+        """
+        Accepts a list of up to 3 image files, processes them, 
+        and generates a single response.
+        """
+        if len(image_files) > 3:
+            raise ValueError("A maximum of 3 images can be processed simultaneously.")
+
+        # Encode all images to base64
+        image_data_list = [
+            f"data:image/jpeg;base64,{self.encode_image_to_base64(image_file)}"
+            for image_file in image_files
+        ]
+
+        # Call the model with the list of images
+        response = self.call_model(image_data_list)
+        return response
